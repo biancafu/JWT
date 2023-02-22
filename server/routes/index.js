@@ -1,7 +1,7 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const router = express.Router();
-const useQueries = require("../db/queries/users") ;
+const userQueries = require("../db/queries/users") ;
 
 const jwtKey = "my_secret_key";
 const jwtExpirySeconds = "3 days"; //numbers in seconds, string for other expressions
@@ -24,13 +24,32 @@ router.post('/signup', function (req, res, next) {
   console.log("token:", token);
 
   //create user in database
-  useQueries.createNewUser(userData)
+  userQueries.createNewUser(userData)
     .then(result => {
       //generate a jwt token send it back to front end
       res.json({ token });
     })
     .catch(err => console.log(err));
 
+});
+
+router.post('/login', function(req, res) {
+  const { email, password } = req.body;
+  userQueries.getUser(email)
+    .then(result => {
+      console.log("login:", result);
+      if (!result || result.password !== password) {
+        return res.status(401).end();
+      }
+
+      const token = jwt.sign({ username:result.username }, jwtKey, {
+        algorithm: "HS256",
+        expiresIn: jwtExpirySeconds
+      });
+    console.log("token: (login)", token);
+
+    })
+  
 });
 
 module.exports = router;
