@@ -2,7 +2,7 @@ const db = require('../connection');
 
 const createNewUser = function(user) {
   const {username, email, password} = user;
-  const dbquery = `INSERT INTO "users" (username, email, password) VALUES ($1, $2, $3) RETURNING *;`
+  const dbquery = `INSERT INTO "users" (name, email, password) VALUES ($1, $2, $3) RETURNING *;`
   return db.
   query(dbquery , [username, email, password])
   .then(result => result.rows[0])
