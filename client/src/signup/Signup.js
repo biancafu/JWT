@@ -7,8 +7,9 @@ export default function Signup() {
     const onSubmit = (data) => {
         console.log("client side:",data);
         axios.post('/signup', data)
-        .then(serverData => {
+        .then(res => {
             //store jwt token in local storage
+            localStorage.setItem("token", JSON.stringify(res.data.token));
         })
         reset();
     }; 
