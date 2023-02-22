@@ -1,10 +1,15 @@
 import { React } from 'react';
 import { useForm } from "react-hook-form";
+import axios from 'axios';
 
 export default function Signup() {
     const { register, handleSubmit, reset, formState: {errors} } = useForm();
     const onSubmit = (data) => {
-        console.log(data)
+        console.log("client side:",data);
+        axios.post('/signup', data)
+        .then(serverData => {
+            //store jwt token in local storage
+        })
         reset();
     }; 
     const onError = (error) => {
