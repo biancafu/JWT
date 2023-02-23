@@ -49,7 +49,9 @@ router.post('/login', function(req, res) {
         algorithm: "HS256",
         expiresIn: jwtExpirySeconds
       });
-    console.log("token: (login)", token);
+
+      res.json({ token });
+      console.log("token: (login)", token);
 
     })
   
