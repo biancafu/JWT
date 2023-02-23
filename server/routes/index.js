@@ -35,11 +35,14 @@ router.post('/signup', function (req, res, next) {
 
 router.post('/login', function(req, res) {
   const { email, password } = req.body;
+  console.log(email, password)
   userQueries.getUser(email)
     .then(result => {
-      console.log("login:", result);
-      if (!result || result.password !== password) {
-        return res.status(401).end();
+      console.log("login result:", result);
+      if (!result) {
+        return res.json({message: "user does not exist"});
+      } else if(result.password !== password) {
+        return res.json({message: "incorrect password"});
       }
 
       const token = jwt.sign({ username:result.username }, jwtKey, {

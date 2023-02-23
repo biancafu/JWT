@@ -9,10 +9,10 @@ const createNewUser = function(user) {
   .catch(err => console.log(err));
 }
 
-const getUser = function(user) {
+const getUser = function(email) {
   const dbquery = `SELECT * FROM users WHERE email = $1;`
   return db.
-  query(dbquery, [user.email])
+  query(dbquery, [email])
   .then(result => result.rows[0])
   .catch(err => console.log(err));
 }

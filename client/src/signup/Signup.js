@@ -5,7 +5,6 @@ import axios from 'axios';
 export default function Signup() {
     const { register, handleSubmit, reset, formState: {errors} } = useForm();
     const onSubmit = (data) => {
-        console.log("client side:",data);
         axios.post('/signup', data)
         .then(res => {
             //store jwt token in local storage
