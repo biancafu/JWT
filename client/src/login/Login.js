@@ -21,9 +21,9 @@ export default function Login() {
             })
             .catch(err => {
                 console.log(err);
-                setErrorMessage(err.data.message);
             })
         reset();
+        setErrorMessage("");
     };
     const onError = (error) => {
         console.log(error)
