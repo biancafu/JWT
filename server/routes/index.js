@@ -63,12 +63,12 @@ router.post('/login', function(req, res) {
 });
 
 //insert curr token it into database as invalid token
-router.get('/signout', function(req, res) {
-  const token = req.body;
+router.post('/signout', function(req, res) {
+  const { token } = req.body;
   console.log(token)
   userQueries.createInvalidToken(token)
     .then(result => {
-      console.log("logout result:", result);
+      console.log("signout result:", result);
     })
   
 });
