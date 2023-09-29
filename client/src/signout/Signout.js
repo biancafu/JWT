@@ -10,13 +10,15 @@ export default function Signout() {
             .then(res => {
                 console.log("sign out as", token)
                 localStorage.removeItem("token")
+                localStorage.removeItem("user")
+                // window.location.reload(false);
             })
             .catch(err => {
                 console.log(err);
             })
     }
 
-    return <button onClick={onClick}>sign out</button>
+    return <button onClick={onClick} id="signout">sign out</button>
 };
 
 

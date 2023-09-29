@@ -11,6 +11,8 @@ export default function Signup() {
             //store jwt token in local storage
             localStorage.setItem("token", JSON.stringify(res.data.token));
             localStorage.setItem("user", JSON.stringify(res.data.user));
+            // window.location.reload(false);
+
         })
         reset();
     }; 

@@ -17,6 +17,7 @@ export default function Login() {
                 if(res.data.token) {
                     localStorage.setItem("token", JSON.stringify(res.data.token));
                     localStorage.setItem("user", JSON.stringify(res.data.user));
+                    // window.location.reload(false);
 
                 }
             })
