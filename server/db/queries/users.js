@@ -17,7 +17,7 @@ const getUser = function(email) {
   .catch(err => console.log(err));
 }
 
-const createToken = function(token) {
+const createInvalidToken = function(token) {
   const dbquery = `INSERT INTO "invalid_tokens" (token) VALUES ($1) RETURNING *;`
   return db.
   query(dbquery , [token])
@@ -25,7 +25,7 @@ const createToken = function(token) {
   .catch(err => console.log(err));
 }
 
-const getToken = function(token) {
+const getInvalidToken = function(token) {
   const dbquery = `SELECT * FROM invalid_tokens WHERE token = $1;`
   return db.
   query(dbquery , [token])
@@ -33,4 +33,4 @@ const getToken = function(token) {
   .catch(err => console.log(err));
 
 }
-module.exports = { createNewUser, getUser };
+module.exports = { createNewUser, getUser, createInvalidToken, getInvalidToken };

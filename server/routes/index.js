@@ -9,9 +9,9 @@ const jwtKey = "my_secret_key";
 const jwtExpirySeconds = "3 days"; //numbers in seconds, string for other expressions
 
 /* GET home page. */
-router.get('/', function (req, res, next) {
-  res.render('index', { title: 'Express' });
-});
+// router.get('/', function (req, res, next) {
+//   res.render('index', { title: 'Express' });
+// });
 
 // sign up
 router.post('/signup', function (req, res, next) {
@@ -58,6 +58,17 @@ router.post('/login', function(req, res) {
       res.json({ token });
       console.log("token: (login)", token);
 
+    })
+  
+});
+
+//insert curr token it into database as invalid token
+router.get('/signout', function(req, res) {
+  const token = req.body;
+  console.log(token)
+  userQueries.createInvalidToken(token)
+    .then(result => {
+      console.log("logout result:", result);
     })
   
 });
