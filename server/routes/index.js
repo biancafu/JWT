@@ -1,7 +1,9 @@
 const express = require('express');
+const app = express();
 const jwt = require('jsonwebtoken');
 const router = express.Router();
 const userQueries = require("../db/queries/users") ;
+const users = require("./users.js"); //diff route
 
 const jwtKey = "my_secret_key";
 const jwtExpirySeconds = "3 days"; //numbers in seconds, string for other expressions
@@ -16,6 +18,7 @@ router.post('/signup', function (req, res, next) {
   const userData = req.body;
   console.log("sign up:", userData);
 
+  //create jwt token once we get a post request
   //jwt sign asynchronously
   const token = jwt.sign({ username:userData.username }, jwtKey, {
 		algorithm: "HS256",
@@ -45,6 +48,8 @@ router.post('/login', function(req, res) {
         return res.json({message: "incorrect password"});
       }
 
+      //if we don't return, this means we log in successfully
+      //therefore sign in with token
       const token = jwt.sign({ username:result.username }, jwtKey, {
         algorithm: "HS256",
         expiresIn: jwtExpirySeconds
@@ -56,5 +61,10 @@ router.post('/login', function(req, res) {
     })
   
 });
+
+
+
+// …
+app.use("/users", users);
 
 module.exports = router;
