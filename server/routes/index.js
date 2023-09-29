@@ -70,6 +70,7 @@ router.post('/signout', function(req, res) {
   console.log(token)
   userQueries.createInvalidToken(token)
     .then(result => {
+      res.json({ token });
       console.log("signout result:", result);
     })
   
