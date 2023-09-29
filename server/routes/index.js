@@ -20,6 +20,8 @@ router.post('/signup', function (req, res, next) {
 
   //create jwt token once we get a post request
   //jwt sign asynchronously
+      //(Asynchronous) If a callback is supplied, the callback is called with the err or the JWT.
+    //(Synchronous) Returns the JsonWebToken as string
   const token = jwt.sign({ username:userData.username }, jwtKey, {
 		algorithm: "HS256",
 		expiresIn: jwtExpirySeconds
