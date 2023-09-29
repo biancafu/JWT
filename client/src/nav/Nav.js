@@ -1,22 +1,11 @@
-import { React, useState } from 'react';
-import axios from 'axios';
+import { React } from 'react';
 
 
 export default function Nav() {
-    const onClick = () => {
-        const token = localStorage.getItem("token")
-
-        axios.post('/signout', {token})
-            .then(res => {
-                console.log("sign out as", token)
-                localStorage.removeItem("token")
-            })
-            .catch(err => {
-                console.log(err);
-            })
-    }
-
-    return <button onClick={onClick}>sign out</button>
+    user = localStorage.getItem("user")
+    return <div>
+        {user && <div>log in as: {user}</div>}
+    </div> 
 };
 
 

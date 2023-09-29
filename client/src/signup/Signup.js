@@ -10,6 +10,7 @@ export default function Signup() {
             //the response we get from posting a request is the jwt token
             //store jwt token in local storage
             localStorage.setItem("token", JSON.stringify(res.data.token));
+            localStorage.setItem("user", JSON.stringify(res.data.user));
         })
         reset();
     }; 

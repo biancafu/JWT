@@ -3,6 +3,7 @@ import './App.css';
 import Signup from './signup/Signup';
 import Login from './login/Login';
 import Signout from './signout/Signout';
+import Nav from './nav/Nav';
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <Signup />
       <Login />
       <Signout />
+      <Nav />
     </div>
   );
 }

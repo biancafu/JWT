@@ -32,7 +32,7 @@ router.post('/signup', function (req, res, next) {
   userQueries.createNewUser(userData)
     .then(result => {
       //generate a jwt token send it back to front end
-      res.json({ token });
+      res.json({ token, "user": userData.username });
     })
     .catch(err => console.log(err));
 
@@ -57,7 +57,7 @@ router.post('/login', function(req, res) {
         expiresIn: jwtExpirySeconds
       });
 
-      res.json({ token });
+      res.json({ token, user:result.username });
       console.log("token: (login)", token);
 
     })
